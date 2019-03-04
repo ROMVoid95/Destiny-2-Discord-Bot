@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+/SERVER_SETTINGS/
+/target/
+src/test/
+values/
+src/main/resources/
+secrets.json
+/.settings/
+/img/
+.classpath
+config.yml
