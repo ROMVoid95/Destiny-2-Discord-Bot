@@ -6,21 +6,21 @@ import net.dv8tion.jda.core.entities.Game;
 public class STATIC {
 
                       //SET THE BOTS PREFIX
-    public static final String prefix = "PREFIX";
+    public static final String prefix = "~";
     
                       //CURRENT VERSION
-    public static final String VERSION = "version";
+    public static final String VERSION = "2.0.0";
     
                       //CUSTOM DISCORD PRESENCE MESSAGE
-    public static String CUSTOM_MESSAGE = "message";
+    public static String CUSTOM_MESSAGE = "Development";
     
                       //SET THE BOTS PRESENCEE
     public static Game GAME = Game.playing(CUSTOM_MESSAGE + " | v." + VERSION);
     
                       //DISCORD SERVER STAFF ROLES BY NAME
-    public static final String[] STAFF = {"ROLE1", "ROLE2", "ROLE3", "ROLE4", "ETC"};
+    public static final String[] STAFF = {"Founder", "Admins", "Head Admin", "Admin", "Head Moderator", "Moderator", "Retired Staff"};
                       //BOTS OWNER BY DISCORD ID
-    public static final String[] OWNERS = {"OWNER ID"};
+    public static final String[] OWNERS = {"393847930039173131"};
     public static String input;
     public static int reconnectCount = 0;
     public static Date lastRestart;

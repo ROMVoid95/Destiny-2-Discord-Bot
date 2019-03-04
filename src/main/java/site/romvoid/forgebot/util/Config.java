@@ -16,7 +16,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 
 public class Config {
 
-    private static final File configYML = new File("C:/Users/AJ/Downloads/Bots/ForgeBot 2.0/config.yml");
+    private static final File configYML = new File("config.yml");
     private static final ObjectMapper configMapper = new ObjectMapper(new YAMLFactory());
 
     private static ConfigRoles LoadedRoles;
