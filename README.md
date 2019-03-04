@@ -2,7 +2,8 @@
 > Currently **ForgeBot**
 ---
 
-As the name states, is a Discord bot built around Bungie's Destiny 2 game. It started off as a very simple bot that assigned roles to members in the [DESTINY 2 LFG](https://discord.gg/2Bxnjsv) Discord based off the amount off raid clears they had. After the initial developer no longer wanted to maintain the code for the seasonal changing game, I threw my hat in (having no prior coding experience) and insisted that I be allowed to update the bot.
+As the name states, is a Discord bot built around Bungie's Destiny 2 game. It started off as a very simple bot that assigned roles to members in the [DESTINY 2 LFG](https://discord.gg/2Bxnjsv) Discord based off the amount off raid clears they had. 
+The bot has been rewritten from Discord4J and now uses JDA. The code is probably horrific to look at but it will be slowly rewritten as my programming knowledge grows.
 
 A few months later the bot has expanded in functionality, thanks to a few helping hands. Currently the features are:
 
