@@ -1,7 +1,5 @@
 package site.romvoid.forgebot.util;
 
-import java.io.IOException;
-import java.util.regex.Pattern;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Role;
@@ -12,22 +10,19 @@ import site.romvoid.forgebot.util.destiny.UserMemberID;
 import site.romvoid.forgebot.util.destiny.clan.ClanTag;
 import site.romvoid.forgebot.util.destiny.raids.RaidStats;
 import site.romvoid.forgebot.util.destiny.raids.ReqRaids;
-import site.romvoid.forgebot.util.exemptions.IndexExemption;
 
 public class RoleAssignment {
     
     public static void action(MessageReactionAddEvent event) throws Exception {
         String name = event.getMember().getEffectiveName();
         String nickname = null;
-        if (name.contains("["))
-            nickname = name.replaceFirst(
-                    Pattern.quote(name.substring(name.indexOf("["), name.indexOf("]") + 1)), "")
-                    .replaceAll(" ", "");
-        else
+        if (name.contains("[")) {
+            nickname = Parse.nickname(name);
+        } else {
             nickname = event.getMember().getEffectiveName();
-        Member user = event.getMember();
+        }
         String memId = UserMemberID.getMemberId(nickname);
- 
+        Member user = event.getMember();
         Guild guild = event.getGuild();
         Role veteranRaider;
         Role experiencedRaider;
@@ -120,15 +115,14 @@ public class RoleAssignment {
     }
 
     public static int getClanMemberRank(MessageReactionAddEvent event)
-            throws IndexExemption, IOException {
+            throws Exception {
         String name = event.getMember().getEffectiveName();
         String nickname = null;
-        if (name.contains("["))
-            nickname = name.replaceFirst(
-                    Pattern.quote(name.substring(name.indexOf("["), name.indexOf("]") + 1)), "")
-                    .replaceAll(" ", "");
-        else
+        if (name.contains("[")) {
+            nickname = Parse.nickname(name);
+        } else {
             nickname = event.getMember().getEffectiveName();
+        }
         String id = UserMemberID.getMemberId(nickname);
         String rank = ClanTag.getUserRank(id);
 
@@ -142,15 +136,14 @@ public class RoleAssignment {
 
     }
 
-    public static String getRaidReportRank(MessageReactionAddEvent event) throws IOException {
+    public static String getRaidReportRank(MessageReactionAddEvent event) throws Exception {
         String name = event.getMember().getEffectiveName();
         String nickname = null;
-        if (name.contains("["))
-            nickname = name.replaceFirst(
-                    Pattern.quote(name.substring(name.indexOf("["), name.indexOf("]") + 1)), "")
-                    .replaceAll(" ", "");
-        else
+        if (name.contains("[")) {
+            nickname = Parse.nickname(name);
+        } else {
             nickname = event.getMember().getEffectiveName();
+        }
         String id = UserMemberID.getMemberId(nickname);
         boolean clear = RaidReport.getClearsRank(id).contains("Challenger");
         boolean speed = RaidReport.getSpeedRank(id).contains("Challenger");

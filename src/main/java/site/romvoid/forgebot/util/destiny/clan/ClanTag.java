@@ -90,7 +90,8 @@ public class ClanTag {
                             return motto;
     }
 
-    public static String getUserRank(String memberID)  throws IOException {
+    public static String getUserRank(String nickname)  throws IOException {
+        String memberID = UserMemberID.getMemberId(nickname);
         String endpoint = "GroupV2/User/2/" + memberID + "/0/1/";
         JsonObject json;
         JsonObject member;

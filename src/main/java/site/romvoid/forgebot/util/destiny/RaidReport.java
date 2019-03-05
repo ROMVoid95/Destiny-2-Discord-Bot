@@ -64,7 +64,7 @@ public class RaidReport {
         JsonElement speed;
         int timeSec;
         String tier;
-        String subtier;;
+        String subtier;
         json = json.getAsJsonObject("response");
         speed = json.getAsJsonObject().get("speedRank");
         timeSec = speed.getAsJsonObject().get("value").getAsInt();

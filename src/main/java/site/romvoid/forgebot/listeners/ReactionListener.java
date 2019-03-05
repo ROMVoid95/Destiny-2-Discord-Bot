@@ -11,7 +11,6 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import net.dv8tion.jda.core.managers.GuildController;
 import site.romvoid.forgebot.util.Config;
 import site.romvoid.forgebot.util.RoleAssignment;
-
 public class ReactionListener extends ListenerAdapter {
 
     @Override

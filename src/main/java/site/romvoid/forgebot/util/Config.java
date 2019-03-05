@@ -1,13 +1,11 @@
 package site.romvoid.forgebot.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.entities.Message;
@@ -16,7 +14,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 
 public class Config {
 
-    private static final File configYML = new File("config.yml");
+    private static final File configYML = new File("C:/Users/AJ/git/ForgeBot/config.yml");
     private static final ObjectMapper configMapper = new ObjectMapper(new YAMLFactory());
 
     private static ConfigRoles LoadedRoles;

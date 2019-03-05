@@ -121,5 +121,54 @@ public class embedSender {
                 .setFooter("Provided by © 2019 DestinyRaidReport", "https://i.imgur.com/JWCUxyx.png");
                channel.sendMessage(beta.build()).queue();
     }
+    
+    public static void notYet(MessageReceivedEvent event) {
+        MessageChannel channel = event.getChannel();
+        EmbedBuilder beta = new EmbedBuilder()
+                .setTitle("**Raid.Report Ranks For**")
+                .setColor(Color.ORANGE)
+                .addField("This command has not been fully implemented", "“I’m just a simple man trying to make my way in the universe.” — Jango Fett", false);
+        channel.sendMessage(beta.build()).queue();
+    }
+    
+    public static void noId(MessageReceivedEvent event) {
+        MessageChannel channel = event.getChannel();
+        EmbedBuilder beta = new EmbedBuilder()
+                .setColor(Color.RED)
+                .setDescription("**User Doesn't have an active Destiny 2 Account**\n\n");
+        channel.sendMessage(beta.build()).queue();
+    }
+    
+    public static void hasClearsRank(MessageReceivedEvent event) {
+        MessageChannel channel = event.getChannel();
+        EmbedBuilder beta = new EmbedBuilder()
+                .setColor(Color.RED)
+                .setDescription("**User Doesn't have an active Destiny 2 Account**\n\n");
+        channel.sendMessage(beta.build()).queue();
+    }
+    
+    public static void hasSpeedRank(MessageReceivedEvent event) {
+        MessageChannel channel = event.getChannel();
+        EmbedBuilder beta = new EmbedBuilder()
+                .setColor(Color.RED)
+                .setDescription("**User Doesn't have an active Destiny 2 Account**\n\n");
+        channel.sendMessage(beta.build()).queue();
+    }
+    
+    public static void hasBothRank(MessageReceivedEvent event) {
+        MessageChannel channel = event.getChannel();
+        EmbedBuilder beta = new EmbedBuilder()
+                .setColor(Color.RED)
+                .setDescription("**User Doesn't have an active Destiny 2 Account**\n\n");
+        channel.sendMessage(beta.build()).queue();
+    }
+    
+    public static void hasNoRank(MessageReceivedEvent event) {
+        MessageChannel channel = event.getChannel();
+        EmbedBuilder beta = new EmbedBuilder()
+                .setColor(Color.RED)
+                .setDescription("**User Doesn't have an active Destiny 2 Account**\n\n");
+        channel.sendMessage(beta.build()).queue();
+    }
 
 }

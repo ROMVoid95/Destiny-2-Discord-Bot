@@ -16,19 +16,7 @@ public class commandMemberId implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) throws Exception {
 
-        String name = event.getMember().getEffectiveName();
-        String nickname;
-
-        if (name.contains("["))
-            nickname = name.replaceFirst(
-                    Pattern.quote(name.substring(name.indexOf("["), name.indexOf("]") + 1)), "")
-                    .replaceAll(" ", "");
-        else
-            nickname = event.getMember().getEffectiveName();
-        String id = UserMemberID.getMemberId(nickname);
-        event.getChannel().sendMessage(new EmbedBuilder().setAuthor(nickname)
-                .addField("**Destiny 2 MembershipId**", id, false).build()).queue();
-    }
+        
 
 
 
