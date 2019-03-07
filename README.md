@@ -1,5 +1,6 @@
 # Destiny 2 Discord Bot 
 > Currently **ForgeBot**
+>> Currently **PrimeBot**
 ---
 
 As the name states, is a Discord bot built around Bungie's Destiny 2 game. It started off as a very simple bot that assigned roles to members in the [DESTINY 2 LFG](https://discord.gg/2Bxnjsv) Discord based off the amount off raid clears they had. 
