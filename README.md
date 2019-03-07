@@ -1,6 +1,5 @@
 # Destiny 2 Discord Bot 
-Currently **ForgeBot**
->>Currently **PrimeBot**
+> Currently **PrimeBot**
 
 ---
 
