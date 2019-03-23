@@ -118,8 +118,30 @@ public class embedSender {
                 .addField("Full Clears Rank #" + rank, clears, true)
                 .addField("Speed Rank", speed, true)
                 .addBlankField(false)
-                .setFooter("Provided by � 2019 DestinyRaidReport", "https://i.imgur.com/JWCUxyx.png");
+                .setFooter("Provided by © 2019 DestinyRaidReport", "https://i.imgur.com/JWCUxyx.png");
                channel.sendMessage(beta.build()).queue();
+    }
+    
+    public static void hello(MessageReceivedEvent event) {
+        MessageChannel channel = event.getChannel();
+
+        EmbedBuilder embed = new EmbedBuilder()
+                .setColor(Color.YELLOW)
+        .addField("Hello! I am PrimeBot, your new Server Bot. It's a pleasure to be here", "Here's just the start of changes!" + "\n" +
+                ":small_orange_diamond: Rols are now assigned after selecting a region by the reactions in #starting-off  \n" + 
+                ":small_orange_diamond: Regions are no longer required in your Nickname \n "+
+                "⁣    :small_blue_diamond: You may keep them or remove them from your Nickname\n"
+                , false);
+        
+        channel.sendMessage(embed.build()).complete();
+    }
+    
+    public static void noId(MessageReceivedEvent event) {
+        MessageChannel channel = event.getChannel();
+        EmbedBuilder beta = new EmbedBuilder()
+                .setColor(Color.RED)
+                .setDescription("**User Doesn't have an active Destiny 2 Account**\n\n");
+        channel.sendMessage(beta.build()).queue();
     }
 
 }

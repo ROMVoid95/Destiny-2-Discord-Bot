@@ -1,18 +1,21 @@
 package site.romvoid.forgebot.util;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.regex.Pattern;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.entities.Role;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.react.MessageReactionAddEvent;
 import site.romvoid.forgebot.util.destiny.Codes;
+import site.romvoid.forgebot.util.destiny.Player;
 import site.romvoid.forgebot.util.destiny.RaidReport;
-import site.romvoid.forgebot.util.destiny.UserMemberID;
 import site.romvoid.forgebot.util.destiny.clan.ClanTag;
 import site.romvoid.forgebot.util.destiny.raids.RaidStats;
 import site.romvoid.forgebot.util.destiny.raids.ReqRaids;
-import site.romvoid.forgebot.util.exemptions.IndexExemption;
 
 public class RoleAssignment {
     
@@ -25,8 +28,11 @@ public class RoleAssignment {
                     .replaceAll(" ", "");
         else
             nickname = event.getMember().getEffectiveName();
-        Member user = event.getMember();
-        String memId = UserMemberID.getMemberId(nickname);
+        Member member = event.getMember();
+        User author = event.getUser();
+        String discordid = author.getId();
+        PrivateChannel pvch = author.openPrivateChannel().complete();
+        String memId = Player.getId(nickname);
  
         Guild guild = event.getGuild();
         Role veteranRaider;
@@ -37,7 +43,6 @@ public class RoleAssignment {
         Role clanRecruiter;
         Role challenger;
         Role masteryRanks;
-        Role raidRoles;
         Role misc;
         Role mColor;
 
@@ -49,42 +54,48 @@ public class RoleAssignment {
         clanRecruiter = guild.getRoleById("400157331327025152");
         challenger = guild.getRoleById("527067149353877504");
         masteryRanks = guild.getRoleById("530730967657086976");
-        raidRoles = guild.getRoleById("530728549762596864");
         misc = guild.getRoleById("530736433665933323");
         mColor = guild.getRoleById("542755267343941642");
-
+        
+        if (memId == null) {
+            EmbedBuilder embed = new EmbedBuilder().setColor(Color.RED)
+                    .setTitle("__**There was an error assigning your roles Guardian!**__ \n\n")
+                    .addField("**Make sure your nickname in the server matches your Battle.net username exactly**", "Example:\n" + 
+                             "username#numbers / ROMVoid#1909", false)
+                             .setImage("https://imgur.com/umllqNf.png");
+            pvch.sendMessage(embed.build()).queue();
+        }
+        
         if (memId != null) {
+            MySQL.createUser(discordid, nickname, memId);
             RaidStats rs = ReqRaids.collectAllRaidStats(nickname);
 
             if (getDesignatedRaiderRole(rs) == Codes.Raider) {
-                guild.getController().addSingleRoleToMember(user, raider).queue();
-                guild.getController().addSingleRoleToMember(user, guardian).queue();
-                guild.getController().addSingleRoleToMember(user, raidRoles).queue();
+                guild.getController().addSingleRoleToMember(member, raider).queue();
+                guild.getController().addSingleRoleToMember(member, guardian).queue();
             }
             if (getDesignatedRaiderRole(rs) == Codes.ExperiencedRaider) {
-                guild.getController().addSingleRoleToMember(user, experiencedRaider).queue();
-                guild.getController().addSingleRoleToMember(user, guardian).queue();
-                guild.getController().addSingleRoleToMember(user, raidRoles).queue();
+                guild.getController().addSingleRoleToMember(member, experiencedRaider).queue();
+                guild.getController().addSingleRoleToMember(member, guardian).queue();
             }
             if (getDesignatedRaiderRole(rs) == Codes.VeteranRaider) {
-                guild.getController().addSingleRoleToMember(user, veteranRaider).queue();
-                guild.getController().addSingleRoleToMember(user, guardian).queue();
-                guild.getController().addSingleRoleToMember(user, raidRoles).queue();
+                guild.getController().addSingleRoleToMember(member, veteranRaider).queue();
+                guild.getController().addSingleRoleToMember(member, guardian).queue();
             }
             if (getPrestigeRaiderRole(rs) == Codes.PrestigeRaider) {
-                guild.getController().addSingleRoleToMember(user, prestigeRaider).queue();
+                guild.getController().addSingleRoleToMember(member, prestigeRaider).queue();
             }
             if (getClanMemberRank(event) == Codes.clanRecruiter) {
-                guild.getController().addSingleRoleToMember(user, clanRecruiter).queue();
-                guild.getController().addSingleRoleToMember(user, misc).queue();
+                guild.getController().addSingleRoleToMember(member, clanRecruiter).queue();
+                guild.getController().addSingleRoleToMember(member, misc).queue();
             }
             if (getRaidReportRank(event) == "HasChallenger") {
-                guild.getController().addSingleRoleToMember(user, challenger).queue();
-                guild.getController().addSingleRoleToMember(user, masteryRanks).queue();
-                guild.getController().addSingleRoleToMember(user, mColor ).queue();
+                guild.getController().addSingleRoleToMember(member, challenger).queue();
+                guild.getController().addSingleRoleToMember(member, masteryRanks).queue();
+                guild.getController().addSingleRoleToMember(member, mColor ).queue();
             } else {
-                guild.getController().addSingleRoleToMember(user, guardian).queue();
-                guild.getController().addSingleRoleToMember(user, misc).queue();
+                guild.getController().addSingleRoleToMember(member, guardian).queue();
+                guild.getController().addSingleRoleToMember(member, misc).queue();
             }
         }
     }
@@ -120,7 +131,7 @@ public class RoleAssignment {
     }
 
     public static int getClanMemberRank(MessageReactionAddEvent event)
-            throws IndexExemption, IOException {
+            throws IOException {
         String name = event.getMember().getEffectiveName();
         String nickname = null;
         if (name.contains("["))
@@ -129,7 +140,7 @@ public class RoleAssignment {
                     .replaceAll(" ", "");
         else
             nickname = event.getMember().getEffectiveName();
-        String id = UserMemberID.getMemberId(nickname);
+        String id = Player.getId(nickname);
         String rank = ClanTag.getUserRank(id);
 
         if (rank == "Founder") {
@@ -151,7 +162,7 @@ public class RoleAssignment {
                     .replaceAll(" ", "");
         else
             nickname = event.getMember().getEffectiveName();
-        String id = UserMemberID.getMemberId(nickname);
+        String id = Player.getId(nickname);
         boolean clear = RaidReport.getClearsRank(id).contains("Challenger");
         boolean speed = RaidReport.getSpeedRank(id).contains("Challenger");
 

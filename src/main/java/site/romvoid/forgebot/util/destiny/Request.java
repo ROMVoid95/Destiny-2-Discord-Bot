@@ -1,7 +1,6 @@
 package site.romvoid.forgebot.util.destiny;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -22,7 +21,7 @@ public class Request {
 
     private static String domain = "https://www.bungie.net/Platform/";
 
-    public static JsonObject get(String endPoint) throws IOException {
+    public static JsonObject get(String endPoint) throws Exception {
         URL getRequestURL = new URL(domain + endPoint);
         HttpURLConnection con = (HttpURLConnection) getRequestURL.openConnection();
         con.setRequestMethod("GET");

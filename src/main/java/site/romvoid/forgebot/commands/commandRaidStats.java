@@ -7,7 +7,7 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import site.romvoid.forgebot.util.commandLogger;
 import site.romvoid.forgebot.util.embedSender;
-import site.romvoid.forgebot.util.destiny.UserMemberID;
+import site.romvoid.forgebot.util.destiny.Player;
 import site.romvoid.forgebot.util.destiny.raids.RaidStats;
 import site.romvoid.forgebot.util.destiny.raids.ReqRaids;
 
@@ -28,7 +28,7 @@ public class commandRaidStats implements Command {
                     .replaceAll(" ", "");
         else
             nickname = event.getMember().getEffectiveName();
-        String id = UserMemberID.getMemberId(nickname);
+        String id = Player.getId(nickname);
         if (id != null) {
             RaidStats rs = ReqRaids.collectAllRaidStats(nickname);
             embedSender.raidStats(event, rs);

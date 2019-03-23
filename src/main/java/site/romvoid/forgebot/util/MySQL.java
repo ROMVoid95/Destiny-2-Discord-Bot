@@ -115,16 +115,32 @@ public class MySQL {
     }
 
     
-    public static void createUser(User user, Member member, String memberId ) {
+    public static void createUser(String memberId, String nickname, String id) {
         try {
             if (connection.isClosed()) 
                 connect();
                 PreparedStatement ps = connection.prepareStatement
-                        ("INSERT INTO `members`(`discord_id`, `discord_name`, `nickname`, `bungie_id`) VALUES (?, ?, ?, ?)");
-                ps.setString(1, user.getId());
-                ps.setString(2, user.getName());
-                ps.setString(3, member.getNickname());
-                ps.setString(4, memberId.toString());
+                        ("INSERT INTO `users`(`discordid`, `bnetid`, `bungieid`) VALUES (?, ?, ?)");
+                ps.setString(1, memberId);
+                ps.setString(2, nickname);
+                ps.setString(3, id);
+                ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void setLeviStats(String nickname, int total, int normal, int prestige, int guide) {
+        try {
+            if (connection.isClosed()) 
+                connect();
+                PreparedStatement ps = connection.prepareStatement
+                        ("INSERT INTO `levi`(`nickname`, `t`, `n`, `p`, `g`) VALUES (?, ?, ?, ?, ?)");
+                ps.setString(1, nickname);
+                ps.setInt(2, total);
+                ps.setInt(3, normal);
+                ps.setInt(4, prestige);
+                ps.setInt(5, guide);
                 ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();

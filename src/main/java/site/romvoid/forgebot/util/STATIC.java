@@ -12,10 +12,10 @@ public class STATIC {
     public static final String VERSION = "2.0.0";
     
                       //CUSTOM DISCORD PRESENCE MESSAGE
-    public static String CUSTOM_MESSAGE = "Development";
+    public static String CUSTOM_MESSAGE = "";
     
                       //SET THE BOTS PRESENCEE
-    public static Game GAME = Game.playing(CUSTOM_MESSAGE + " | v." + VERSION);
+    public static Game GAME = Game.playing("v" + VERSION);
     
                       //DISCORD SERVER STAFF ROLES BY NAME
     public static final String[] STAFF = {"Founder", "Admins", "Head Admin", "Admin", "Head Moderator", "Moderator", "Retired Staff"};

@@ -1,15 +1,11 @@
 package site.romvoid.forgebot.util.destiny.pvp;
 
-import java.io.IOException;
 import com.google.gson.JsonObject;
 import site.romvoid.forgebot.util.destiny.Request;
-import site.romvoid.forgebot.util.destiny.UserMemberID;
-import site.romvoid.forgebot.util.exemptions.IndexExemption;
 
 public class BaseStats {
     
-    public static String getKd(String nickname) throws IndexExemption, IOException {
-        String memberID = UserMemberID.getMemberId(nickname);
+    public static String getKd(String memberID) throws Exception {
         String endpoint = "/Destiny2/4/Account/" + memberID + "/Stats/?groups=general";
         JsonObject json;
         JsonObject allChar;
@@ -27,8 +23,7 @@ public class BaseStats {
 
     }
     
-    public static String getKda(String nickname) throws IndexExemption, IOException {
-        String memberID = UserMemberID.getMemberId(nickname);
+    public static String getKda(String memberID) throws Exception {
         String endpoint = "/Destiny2/4/Account/" + memberID + "/Stats/?groups=general";
         JsonObject json;
         JsonObject allChar;

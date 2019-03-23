@@ -1,11 +1,10 @@
 package site.romvoid.forgebot.util.destiny.raids;
 
-import java.io.IOException;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import site.romvoid.forgebot.util.destiny.Player;
 import site.romvoid.forgebot.util.destiny.Request;
 import site.romvoid.forgebot.util.destiny.UserCharID;
-import site.romvoid.forgebot.util.destiny.UserMemberID;
 import site.romvoid.forgebot.util.destiny.Utils;
 
 public class ReqRaids {
@@ -37,7 +36,7 @@ public class ReqRaids {
 		return rs;
 	}
 
-	private static RaidStats collectCharacterActivityCompletions(String memberID, String characterID) throws IOException {
+	private static RaidStats collectCharacterActivityCompletions(String memberID, String characterID) throws Exception {
 		// Init
 		String endpoint = "Destiny2/4/Account/" + memberID + "/Character/" + characterID + "/Stats/AggregateActivityStats/";
 		JsonObject json;
@@ -122,7 +121,7 @@ public class ReqRaids {
 	}
 
 	public static String getMemberID(String name) throws Exception {
-	    return UserMemberID.getMemberId(name);
+	    return Player.getId(name);
 	}
 
 	public static String[] getCharacterIDs(String memberID) throws Exception {

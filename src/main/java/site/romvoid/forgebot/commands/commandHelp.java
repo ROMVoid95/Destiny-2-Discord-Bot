@@ -32,7 +32,6 @@ public class commandHelp implements Command {
         
 
         EmbedBuilder embed = new EmbedBuilder().setColor(Color.CYAN)
-                .setDescription("SchlaubiBot Commands").setFooter("ForgeBot by ", "ROMVoid")
                 .setAuthor("Bot-Help", "https://romvoid.site/forgebot",
                         "https://cdn.discordapp.com/avatars/515441251953410048/bf6f786d93775417c8a931ca8e7921f5.png")
                 .addField("__**NOTICE**__",

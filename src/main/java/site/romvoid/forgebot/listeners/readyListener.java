@@ -1,18 +1,21 @@
 package site.romvoid.forgebot.listeners;
 
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import site.romvoid.forgebot.util.Config;
-import site.romvoid.forgebot.util.Logger;
 import site.romvoid.forgebot.util.STATIC;
+
 
 
 public class readyListener extends ListenerAdapter {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(readyListener.class);
 
     @Override
     public void onReady(ReadyEvent event) {
@@ -28,7 +31,7 @@ public class readyListener extends ListenerAdapter {
                 + "#--------------------------------------------------------------------------------\n"
                 + "| Running on %s guilds: \n" + "%s"
                 + "#--------------------------------------------------------------------------------\n\n",
-                Logger.Cyan + Logger.Bold + "VoidBot" + Logger.Reset, STATIC.VERSION, "3.8.2_459",
+                 "PrimeBot", STATIC.VERSION, "3.8.2_459",
                 event.getJDA().getGuilds().size(), sb.toString()));
 
         try {

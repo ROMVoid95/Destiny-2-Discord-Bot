@@ -8,7 +8,6 @@ import java.net.URL;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import site.romvoid.forgebot.util.destiny.UserMemberID;
 
 public class ClanTag {
     
@@ -33,8 +32,7 @@ public class ClanTag {
         return null;
     }
 
-    public static String getName(String nickname) throws IOException {
-        String memberID = UserMemberID.getMemberId(nickname);
+    public static String getName(String memberID) throws IOException {
         String endpoint = "GroupV2/User/2/" + memberID + "/0/1/";
         JsonObject json;
         JsonObject group;
@@ -52,8 +50,7 @@ public class ClanTag {
                             return name;   
     }
 
-    public static String memberCount(String nickname) throws IOException {
-        String memberID = UserMemberID.getMemberId(nickname);
+    public static String memberCount(String memberID) throws IOException {
         String endpoint = "GroupV2/User/2/" + memberID + "/0/1/";
         JsonObject json;
         JsonObject group;
@@ -71,8 +68,7 @@ public class ClanTag {
                             return memberCount;
     }
 
-    public static String clanMoto(String nickname)  throws IOException {
-        String memberID = UserMemberID.getMemberId(nickname);
+    public static String clanMoto(String memberID)  throws IOException {
         String endpoint = "GroupV2/User/2/" + memberID + "/0/1/";
         JsonObject json;
         JsonObject group;
@@ -121,9 +117,7 @@ public class ClanTag {
                             
     }
 
-    public static String callSign(String nickname)  throws IOException {
-        
-        String memberID = UserMemberID.getMemberId(nickname);
+    public static String callSign(String memberID)  throws IOException {
         String endpoint = "GroupV2/User/2/" + memberID + "/0/1/";
         JsonObject json;
         JsonObject group;
@@ -143,8 +137,7 @@ public class ClanTag {
                             return callsign;
     }
 
-    public static String join(String nickname)  throws IOException {
-        String memberID = UserMemberID.getMemberId(nickname);
+    public static String join(String memberID)  throws IOException {
         String endpoint = "GroupV2/User/2/" + memberID + "/0/1/";
         JsonObject json;
         JsonObject group;

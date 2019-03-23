@@ -1,13 +1,11 @@
 package site.romvoid.forgebot.util.destiny;
 
-import java.io.IOException;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import site.romvoid.forgebot.util.exemptions.IndexExemption;
 
 public class UserCharID {
     
-    public static String[] getCharID(String memberID) throws IndexExemption, IOException {
+    public static String[] getCharID(String memberID) throws Exception {
         String endpoint = "Destiny2/4/Account/" + memberID + "/Stats/";
         JsonArray jray;
         String[] charIds;
