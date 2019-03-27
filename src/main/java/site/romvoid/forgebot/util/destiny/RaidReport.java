@@ -17,7 +17,7 @@ public class RaidReport {
     public static String Speedtier;
     public static String ClearsTier;
 
-    private static JsonObject getRequest(String memberId) throws IOException {
+    private static JsonObject getRequest(String memberId) throws Exception {
         URL getRequestURL = new URL(domain + memberId + "/");
         HttpURLConnection con = (HttpURLConnection) getRequestURL.openConnection();
         con.setRequestMethod("GET");
@@ -33,7 +33,7 @@ public class RaidReport {
 
     }
 
-    public static String getClearsRank(String memberId) throws IOException {
+    public static String getClearsRank(String memberId) throws Exception {
         JsonObject json = getRequest(memberId);
         JsonElement clearsRank;
         String value;
@@ -59,7 +59,7 @@ public class RaidReport {
 
 
 
-    public static String getSpeedRank(String memberId) throws IOException {
+    public static String getSpeedRank(String memberId) throws Exception {
         JsonObject json = getRequest(memberId);
         JsonElement speed;
         int timeSec;

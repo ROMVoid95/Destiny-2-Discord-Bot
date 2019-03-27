@@ -62,7 +62,7 @@ public class MySQL {
         try{
             if(connection.isClosed())
                 connect();
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO `guilds`(`id`,`prefix`) VALUES (?, ?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO `guilds`(`id`,`prefix`, `logchannel`) VALUES (?, ?, ?)");
             ps.setString(1, guild.getId());
             ps.setString(2, STATIC.prefix);
             ps.execute();
@@ -104,7 +104,7 @@ public class MySQL {
         try {
             if(connection.isClosed())
                 connect();
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM members WHERE discord_id = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE discordid = ?");
             ps.setString(1, user.getId());
             ResultSet rs = ps.executeQuery();
             return rs.next();

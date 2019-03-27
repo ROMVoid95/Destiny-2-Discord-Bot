@@ -1,5 +1,6 @@
 package site.romvoid.forgebot.util.destiny;
 
+import java.util.regex.Pattern;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import site.romvoid.forgebot.util.exemptions.NicknameExcemption;
@@ -57,6 +58,23 @@ public class Player {
             charIds[i] = ((JsonObject) jray.get(i)).get("characterId").toString().replace("\"", "");
             }
         return charIds;
+    }
+    
+    public static String removeBrackets(String nickname) {
+    	String parsedNickname = nickname.replaceFirst(Pattern.quote(nickname.substring(nickname.indexOf("["), nickname.indexOf("]") + 1)), "").replaceAll(" ", "");
+        return parsedNickname;
+        
+    }
+    
+    public static boolean containsBrackets(String nickname) {
+    	if (nickname.contains("[")) {
+    		return true;
+    	} else {
+			return false;
+		}
+
+
+    	
     }
         
 }

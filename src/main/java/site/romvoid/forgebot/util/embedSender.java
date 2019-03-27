@@ -7,6 +7,8 @@ import java.util.TimerTask;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
+import net.dv8tion.jda.core.entities.PrivateChannel;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import site.romvoid.forgebot.util.destiny.raids.RaidStats;
 import site.romvoid.forgebot.util.destiny.raids.Raids;
@@ -122,20 +124,6 @@ public class embedSender {
                channel.sendMessage(beta.build()).queue();
     }
     
-    public static void hello(MessageReceivedEvent event) {
-        MessageChannel channel = event.getChannel();
-
-        EmbedBuilder embed = new EmbedBuilder()
-                .setColor(Color.YELLOW)
-        .addField("Hello! I am PrimeBot, your new Server Bot. It's a pleasure to be here", "Here's just the start of changes!" + "\n" +
-                ":small_orange_diamond: Rols are now assigned after selecting a region by the reactions in #starting-off  \n" + 
-                ":small_orange_diamond: Regions are no longer required in your Nickname \n "+
-                "⁣    :small_blue_diamond: You may keep them or remove them from your Nickname\n"
-                , false);
-        
-        channel.sendMessage(embed.build()).complete();
-    }
-    
     public static void noId(MessageReceivedEvent event) {
         MessageChannel channel = event.getChannel();
         EmbedBuilder beta = new EmbedBuilder()
@@ -143,5 +131,27 @@ public class embedSender {
                 .setDescription("**User Doesn't have an active Destiny 2 Account**\n\n");
         channel.sendMessage(beta.build()).queue();
     }
+    
+    public static void nicknameExcemption(User user, String wn) {
+    	PrivateChannel pc = user.openPrivateChannel().complete();
+        EmbedBuilder embed = new EmbedBuilder().setColor(Color.RED)
+                .setTitle("There was an error assigning your roles "+ wn +"! \n\n")
+                .addField("Reason", "Your Nickname is not set to a proper Battle.net ID", false)
+                .addField("**Ways to Fix**", "Review your nickname to ensure it matches. \nExample:\n ROMVoid#1909 <-- Correct Format\n ROMvoid #1909 <-- Incorrect Format\nThe `#` and numbers that follow must be in your nickname without spaces.\n"
+                		+ "If your nickname matches and still receiving errors please contact ROMVoid#1909", false);
+        pc.sendMessage(embed.build()).queue();
+    }
+    
+    public static void playerNotFound(User user, String nickname) {	
+    	PrivateChannel pc = user.openPrivateChannel().complete();
+        EmbedBuilder embed = new EmbedBuilder().setColor(Color.RED)
+                .setTitle("There was an error assigning your roles Guardian! \n\n")
+                .addField("Reason", "No Destiny 2 account can be found with your nickname \n Currently set to **" + nickname + "**", false)
+                .addField("Ways to Fix", "If your new to Destiny 2 you must have installed and logged on once before your account is activated\n "
+                		+ "\nIf you just installed and logged in please allow up to 3 hours for bungie API to update if it cannot find your account.", false);
+        pc.sendMessage(embed.build()).queue();
+    	
+    }
 
 }
+ 

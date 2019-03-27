@@ -1,21 +1,16 @@
 package site.romvoid.forgebot.listeners;
 
 import java.io.IOException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import site.romvoid.forgebot.util.Config;
 import site.romvoid.forgebot.util.STATIC;
 
 
 
 public class readyListener extends ListenerAdapter {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(readyListener.class);
 
     @Override
     public void onReady(ReadyEvent event) {
@@ -35,10 +30,10 @@ public class readyListener extends ListenerAdapter {
                 event.getJDA().getGuilds().size(), sb.toString()));
 
         try {
-            Config.loadRoles(event.getJDA());
-            for (TextChannel tc : Config.mappedRoles.keySet()) {
-                for (Message m : Config.mappedRoles.get(tc).keySet()) {
-                    for (Emote e : Config.mappedRoles.get(tc).get(m).keySet())
+            ReactionListener.loadRoles(event.getJDA());
+            for (TextChannel tc : ReactionListener.mappedRoles.keySet()) {
+                for (Message m : ReactionListener.mappedRoles.get(tc).keySet()) {
+                    for (Emote e : ReactionListener.mappedRoles.get(tc).get(m).keySet())
                         m.addReaction(e).queue();;
                 }
             }

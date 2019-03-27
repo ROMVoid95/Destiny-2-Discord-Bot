@@ -9,7 +9,7 @@ public class STATIC {
     public static final String prefix = "~";
     
                       //CURRENT VERSION
-    public static final String VERSION = "2.0.0";
+    public static final String VERSION = "2.1.0";
     
                       //CUSTOM DISCORD PRESENCE MESSAGE
     public static String CUSTOM_MESSAGE = "";

@@ -2,10 +2,11 @@ package site.romvoid.forgebot.core;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.security.auth.login.LoginException;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
-import site.romvoid.forgebot.commands.Text;
 import site.romvoid.forgebot.commands.commandBug;
 import site.romvoid.forgebot.commands.commandHelp;
 import site.romvoid.forgebot.commands.commandMemberId;
@@ -13,7 +14,6 @@ import site.romvoid.forgebot.commands.commandRaidReport;
 import site.romvoid.forgebot.commands.commandRaidStats;
 import site.romvoid.forgebot.commands.commandTest;
 import site.romvoid.forgebot.commands.commandUserClan;
-import site.romvoid.forgebot.commands.admin.commandChkRoles;
 import site.romvoid.forgebot.commands.admin.commandPing;
 import site.romvoid.forgebot.commands.admin.commandServers;
 import site.romvoid.forgebot.commands.admin.commandSettings;
@@ -32,6 +32,7 @@ import site.romvoid.forgebot.util.STATIC;
 public class Main {
 
     public static JDABuilder builder;
+    private volatile boolean isReady = false;
 
     public static void main(String[] args) throws InterruptedException, FileNotFoundException{
         System.getProperty("file.encoding");
@@ -49,7 +50,7 @@ public class Main {
             initializeListeners();
 
         try {
-            builder.build();
+        	builder.build();
         } catch (LoginException e) {
             System.out.println("INVALID KEY!!" );
             String token = Configuration.prompt("token");
@@ -70,8 +71,6 @@ public class Main {
        commandHandler.registerCommand("version", new commandVersion());
        commandHandler.registerCommand("servers", new commandServers());
        commandHandler.registerCommand("settings", new commandSettings());
-       commandHandler.registerCommand("hello", new commandChkRoles());
-       commandHandler.registerCommand("text", new Text());
 
     }
     
@@ -82,6 +81,20 @@ public class Main {
         builder.addEventListener(new GuildJoinListener());
         builder.addEventListener(new GuildMemberEvent());
         builder.addEventListener(new ReactionListener());
+    }
+    
+    public boolean isReady() {
+        return isReady;
+    }
+    
+    /**
+     * Mark the shard as ready, the bot will start working once all shards are marked as ready
+     */
+    public void markReady() {
+        if (isReady) {
+            return;
+        }
+        isReady = true;
     }
 
 }

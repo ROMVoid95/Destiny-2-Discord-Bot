@@ -28,7 +28,6 @@ public class Raids {
 		this.normalCompletions = normalCompletions;
 		this.prestigeCompletions = prestigeCompletion;
 		this.guidedCompletions = guidedCompletions;
-		
 	}
 
 	/**

@@ -2,6 +2,7 @@ package site.romvoid.forgebot.util.destiny;
 
 public class Codes {
     
+	public static final int ReturnNone = 99;
     public static final int Questionable = 1;
     public static final int Guardian = 2;
     public static final int Raider = 3;
