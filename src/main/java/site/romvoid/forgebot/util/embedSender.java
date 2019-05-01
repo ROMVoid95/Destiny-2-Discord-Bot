@@ -15,15 +15,14 @@ import site.romvoid.forgebot.util.destiny.raids.Raids;
 
 public class embedSender {
     
-    public static void sendEmbed(String content, MessageChannel channel, Color color){
-        EmbedBuilder embed = new EmbedBuilder().setDescription(content).setColor(color);
+    public static void sendEmbed(EmbedBuilder embed, MessageChannel channel, Color color){
         Message mymsg = channel.sendMessage(embed.build()).complete();
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 mymsg.delete().queue();
             }
-        }, 5000);
+        }, 60000);
     }
     
     public static void sendEmbedWithImg(String content, MessageChannel channel, Color color, String url){

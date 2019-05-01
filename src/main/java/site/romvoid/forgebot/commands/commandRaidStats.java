@@ -12,6 +12,13 @@ import site.romvoid.forgebot.util.destiny.raids.RaidStats;
 import site.romvoid.forgebot.util.destiny.raids.ReqRaids;
 
 public class commandRaidStats implements Command {
+	
+    private static String removeBrackets(String name) {
+        return name
+                .replaceFirst(
+                        Pattern.quote(name.substring(name.indexOf("["), name.indexOf("]") + 1)), "")
+                .replaceAll(" ", "");
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -20,14 +27,22 @@ public class commandRaidStats implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) throws Exception {
-        String name = event.getMember().getEffectiveName();
         String nickname = null;
-        if (name.contains("["))
-            nickname = name.replaceFirst(
-                    Pattern.quote(name.substring(name.indexOf("["), name.indexOf("]") + 1)), "")
-                    .replaceAll(" ", "");
-        else
-            nickname = event.getMember().getEffectiveName();
+        
+        if (args.length > 0) {
+            String name = args[0];
+            if (name.contains("["))
+                nickname = removeBrackets(name);
+            else
+                nickname = args[0];
+
+        } else {
+            String name = event.getMember().getEffectiveName();
+            if (name.contains("["))
+                nickname = removeBrackets(name);
+            else
+                nickname = name;
+        }
         String id = Player.getId(nickname);
         if (id != null) {
             RaidStats rs = ReqRaids.collectAllRaidStats(nickname);

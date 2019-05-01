@@ -28,12 +28,12 @@ public class commandPing implements Command {
         message.delete().queue();
         
         if (permissionHandler.checkStaffRole(event)) {
-            embedSender.sendEmbed("Sorry, " + author.getAsMention() + " but you don't have the permission to perform that command!", channel, Color.red);
+            embedSender.sendPermanentEmbed("Sorry, " + author.getAsMention() + " but you don't have the permission to perform that command!", channel, Color.red);
             return;
         }
 
 
-        embedSender.sendEmbed("My Ping: `" + jda.getPing() + "`", channel, Color.CYAN);
+        embedSender.sendPermanentEmbed("My Ping: `" + jda.getPing() + "`", channel, Color.CYAN);
         }
 
 

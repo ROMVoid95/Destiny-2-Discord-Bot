@@ -1,7 +1,8 @@
 package site.romvoid.forgebot.commands.admin;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import site.romvoid.forgebot.commands.Command;
 import site.romvoid.forgebot.util.STATIC;
@@ -15,15 +16,19 @@ public class commandVersion implements Command {
 
     @Override
     public void action(String[] args, final MessageReceivedEvent event) {
-        event.getChannel().sendMessage("``` ForgeBot Version" + STATIC.VERSION + " by ROMVoid``` Github: https://github.com/ROMVoid95/ForgeBot/").queue();
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                event.getMessage().delete().queue();
-            }
-        },2000);
+    	
+    	MessageChannel channel = event.getChannel();
+    	String img = "https://cdn.discordapp.com/avatars/517867085628702721/14c49784eb9cb447ffa067b5e3e7afb5.png";
+    	
+    	EmbedBuilder embed = new EmbedBuilder()
+    	        .addField("Bot Name", STATIC.BOTNAME, true)
+    	        .addField("Bot Version", STATIC.VERSION, true)
+    	        .addField("Github Link", "[Link](" + STATIC.GITHUB_LINK + ")", false)
+    	        .addField("Patreon Link", "[ROMVoid Patreon](https://www.patreon.com/romvoid)", false)
+    	        .addField("Devs", STATIC.OWNER, false)
+    	        .setThumbnail(img);
 
-
+    	channel.sendMessage(embed.build()).queue();
     }
 
     @Override

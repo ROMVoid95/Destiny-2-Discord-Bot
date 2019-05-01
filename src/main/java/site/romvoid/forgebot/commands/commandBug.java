@@ -31,7 +31,7 @@ public class commandBug implements Command {
             bug += args[i] + " ";
         }
         romvoid.sendMessage("The user" + author.getAsMention() + " has reported ```" + bug + "```").queue();
-        embedSender.sendEmbed("Your bug was succesfully submited", event.getTextChannel(), Color.green);
+        embedSender.sendPermanentEmbed("Your bug was succesfully submited", event.getTextChannel(), Color.green);
     }
 
     @Override

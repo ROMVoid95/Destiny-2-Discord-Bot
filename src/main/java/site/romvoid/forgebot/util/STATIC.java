@@ -5,11 +5,13 @@ import net.dv8tion.jda.core.entities.Game;
 
 public class STATIC {
 
+	public static final String BOTNAME = "PrimeBot";
+	
                       //SET THE BOTS PREFIX
-    public static final String prefix = "~";
+    public static final String PREFIX = "~";
     
                       //CURRENT VERSION
-    public static final String VERSION = "2.1.0";
+    public static final String VERSION = "2.1.1";
     
                       //CUSTOM DISCORD PRESENCE MESSAGE
     public static String CUSTOM_MESSAGE = "";
@@ -20,7 +22,10 @@ public class STATIC {
                       //DISCORD SERVER STAFF ROLES BY NAME
     public static final String[] STAFF = {"Founder", "Admins", "Head Admin", "Admin", "Head Moderator", "Moderator", "Retired Staff"};
                       //BOTS OWNER BY DISCORD ID
-    public static final String[] OWNERS = {"393847930039173131"};
+    public static final String[] OWNERID = {"393847930039173131"};
+    public static final String OWNER = "ROMVoid";
+    public static final String GITHUB_LINK = "https://github.com/ROMVoid95/Destiny-2-Discord-Bot";
+    
     public static String input;
     public static int reconnectCount = 0;
     public static Date lastRestart;

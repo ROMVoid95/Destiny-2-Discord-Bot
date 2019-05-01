@@ -31,12 +31,12 @@ public class commandSettings implements Command {
         channel.sendTyping().queue();
 
         if (permissionHandler.checkStaffRole(event)) {
-            embedSender.sendEmbed("Sorry, " + author.getAsMention() + " but you don't have the permission to perform that command!", channel, Color.red);
+            embedSender.sendPermanentEmbed("Sorry, " + author.getAsMention() + " but you don't have the permission to perform that command!", channel, Color.red);
             return;
         }
 
         if (!(args.length > 0)) {
-            embedSender.sendEmbed(help(), channel, Color.red);
+            embedSender.sendPermanentEmbed(help(), channel, Color.red);
             return;
         }
         if(!MySQL.ifGuildExists(guild))
@@ -62,7 +62,7 @@ public class commandSettings implements Command {
                 break;
             case "log":
                 if (!(args.length > 1)) {
-                    embedSender.sendEmbed(logHelp(), channel, Color.red);
+                    embedSender.sendPermanentEmbed(logHelp(), channel, Color.red);
                     return;
                 }
 
@@ -70,26 +70,26 @@ public class commandSettings implements Command {
                     case "toggle":
                         if (!MySQL.getValue(guild, "logchannel").equals("0")) {
                             MySQL.updateValue(guild, "logchannel", guild.getDefaultChannel().getId());
-                            embedSender.sendEmbed(":white_check_mark: Successfully enabled command logger", channel, Color.green);
+                            embedSender.sendPermanentEmbed(":white_check_mark: Successfully enabled command logger", channel, Color.green);
                         } else {
                             MySQL.updateValue(guild, "logchannel", "0");
-                            embedSender.sendEmbed(":white_check_mark: Successfully disabled command logger", channel, Color.green);
+                            embedSender.sendPermanentEmbed(":white_check_mark: Successfully disabled command logger", channel, Color.green);
 
                         }
                         break;
                     case "channel":
                         if (!(message.getMentionedChannels().size() > 0)) {
-                            embedSender.sendEmbed("Usage : `" + prefix + "joinmessages channel <#Channel>`", channel, Color.red);
+                            embedSender.sendPermanentEmbed("Usage : `" + prefix + "joinmessages channel <#Channel>`", channel, Color.red);
                             return;
                         }
                         MySQL.updateValue(guild, "logchannel", message.getMentionedChannels().get(0).getId());
-                        embedSender.sendEmbed(":white_check_mark: Succesfully set logchannel to " + message.getMentionedChannels().get(0).getAsMention(), channel, Color.green);
+                        embedSender.sendPermanentEmbed(":white_check_mark: Succesfully set logchannel to " + message.getMentionedChannels().get(0).getAsMention(), channel, Color.green);
 
                 }
                 break;
             case "joinmessages":
                 if (!(args.length > 1)) {
-                    embedSender.sendEmbed(joinmessagesHelp(), channel, Color.red);
+                    embedSender.sendPermanentEmbed(joinmessagesHelp(), channel, Color.red);
                     return;
                 }
                 String joinmessage = MySQL.getValue(guild, "joinmessage");
@@ -101,27 +101,27 @@ public class commandSettings implements Command {
 
                         if(enabled.equals("1")){
                             MySQL.updateValue(guild, "joinmessages", "0");
-                            embedSender.sendEmbed(":white_check_mark: Succesfully disabled joinmessages!", channel, Color.green);
+                            embedSender.sendPermanentEmbed(":white_check_mark: Succesfully disabled joinmessages!", channel, Color.green);
                         } else if(enabled.equals("0")){
                             MySQL.updateValue(guild, "joinmessages", "1");
-                            embedSender.sendEmbed(":white_check_mark: Succesfully enabled joinmessages!", channel, Color.green);
+                            embedSender.sendPermanentEmbed(":white_check_mark: Succesfully enabled joinmessages!", channel, Color.green);
                         }
                         break;
 
                     case "channel":
                         if(!(message.getMentionedChannels().size() > 0)){
-                            embedSender.sendEmbed("Usage : `" + prefix + "joinmessages channel <#Channel>`", channel, Color.red);
+                            embedSender.sendPermanentEmbed("Usage : `" + prefix + "joinmessages channel <#Channel>`", channel, Color.red);
                             return;
                         }
 
                         String channelid = message.getMentionedChannels().get(0).getId();
                         MySQL.updateValue(guild,"joinmessagechannel", channelid);
-                        embedSender.sendEmbed(":white_check_mark: Succesfully set joinmessagechannel to " + message.getMentionedChannels().get(0).getAsMention(), channel, Color.green);
+                        embedSender.sendPermanentEmbed(":white_check_mark: Succesfully set joinmessagechannel to " + message.getMentionedChannels().get(0).getAsMention(), channel, Color.green);
                         break;
 
                     case "join":
                         if(!(args.length > 0)){
-                            embedSender.sendEmbed("Usage : `" + prefix + "joinmessages join <Hello %user% on %guild%>`", channel, Color.red);
+                            embedSender.sendPermanentEmbed("Usage : `" + prefix + "joinmessages join <Hello %user% on %guild%>`", channel, Color.red);
                             return;
                         }
 
@@ -129,11 +129,11 @@ public class commandSettings implements Command {
                             joinmessage += " " + args[i];
                         }
                         MySQL.updateValue(guild, "joinmessage", joinmessage.replaceFirst("null ", ""));
-                        embedSender.sendEmbed(":white_check_mark:  Successfully set joinmessage to `" + joinmessage.replaceFirst("null ", "") + "`!", channel, Color.green);
+                        embedSender.sendPermanentEmbed(":white_check_mark:  Successfully set joinmessage to `" + joinmessage.replaceFirst("null ", "") + "`!", channel, Color.green);
                         break;
                     case "leave":
                         if(!(args.length > 0)){
-                            embedSender.sendEmbed("Usage : `" + prefix + "joinmessages leave <Bye %user%>`", channel, Color.red);
+                            embedSender.sendPermanentEmbed("Usage : `" + prefix + "joinmessages leave <Bye %user%>`", channel, Color.red);
                             return;
                         }
 
@@ -141,28 +141,28 @@ public class commandSettings implements Command {
                             leavemessage += " " + args[i];
                         }
                         MySQL.updateValue(guild, "leavemessage", leavemessage.replaceFirst("null ", ""));
-                        embedSender.sendEmbed(":white_check_mark:  Successfully set leavemessage to `" + leavemessage.replaceFirst("null ", "") + "`!", channel, Color.green);
+                        embedSender.sendPermanentEmbed(":white_check_mark:  Successfully set leavemessage to `" + leavemessage.replaceFirst("null ", "") + "`!", channel, Color.green);
 
                 }
                 break;
             case "prefix":
                 if (!(args.length > 1)) {
-                    embedSender.sendEmbed(prefixHelp(), channel, Color.red);
+                    embedSender.sendPermanentEmbed(prefixHelp(), channel, Color.red);
                     return;
                 }
                 if(args[1].equals("reset")){
                     MySQL.updateValue(guild, "prefix", prefix);
-                    embedSender.sendEmbed(":repeat: Successfully restored default prefix", channel, Color.green);
+                    embedSender.sendPermanentEmbed(":repeat: Successfully restored default prefix", channel, Color.green);
                     return;
                 }
 
                 if(args[1].length() > 2){
-                    embedSender.sendEmbed(":warning: Your prefix can't be longer than 2 chars", channel, Color.red);
+                    embedSender.sendPermanentEmbed(":warning: Your prefix can't be longer than 2 chars", channel, Color.red);
                     return;
                 }
 
                 MySQL.updateValue(guild, "prefix", args[1]);
-                embedSender.sendEmbed(":white_check_mark: Successfully set prefix to `" + args[1] + "` !", channel, Color.green);
+                embedSender.sendPermanentEmbed(":white_check_mark: Successfully set prefix to `" + args[1] + "` !", channel, Color.green);
 
 
         }
@@ -180,33 +180,33 @@ public class commandSettings implements Command {
     @Override
     public String help() {
         return "USAGE: \n" +
-                "`  " + STATIC.prefix + "settings log  toggle`  -  Toggles command logger\n" +
-                "`  " + STATIC.prefix + "settings log channel  <#Channel>`  -  Sets log channel\n" +
-                "`  " + STATIC.prefix + "settings joinmessages toggle`  -  Toggles joinmesasges\n" +
-                "`  " + STATIC.prefix + "settings joinmessages toggle`  -  Toggles joinmesasges\n" +
-                "`  " + STATIC.prefix + "settings joinmessages leave `<Godbye %user%> -  Sets leave message\n" +
-                "`  " + STATIC.prefix + "settings joinmessages channel <#Channel>` - Sets message channel\n" +
-                "`  " + STATIC.prefix + "settings prefix <prefix/reset>`  -  Sets the server's prefix"
+                "`  " + STATIC.PREFIX + "settings log  toggle`  -  Toggles command logger\n" +
+                "`  " + STATIC.PREFIX + "settings log channel  <#Channel>`  -  Sets log channel\n" +
+                "`  " + STATIC.PREFIX + "settings joinmessages toggle`  -  Toggles joinmesasges\n" +
+                "`  " + STATIC.PREFIX + "settings joinmessages toggle`  -  Toggles joinmesasges\n" +
+                "`  " + STATIC.PREFIX + "settings joinmessages leave `<Godbye %user%> -  Sets leave message\n" +
+                "`  " + STATIC.PREFIX + "settings joinmessages channel <#Channel>` - Sets message channel\n" +
+                "`  " + STATIC.PREFIX + "settings prefix <prefix/reset>`  -  Sets the server's prefix"
                 ;
     }
 
     public String logHelp() {
         return "USAGE: \n" +
-                "`  " + STATIC.prefix + "settings log  toggle`  -  Toggles command logger\n" +
-                "`  " + STATIC.prefix + "settings log channel  <#Channel>`  -  Sets log channel\n"
+                "`  " + STATIC.PREFIX + "settings log  toggle`  -  Toggles command logger\n" +
+                "`  " + STATIC.PREFIX + "settings log channel  <#Channel>`  -  Sets log channel\n"
                 ;
     }
 
     public String joinmessagesHelp() {
-        return  "`  " + STATIC.prefix + "settings joinmessages toggle`  -  Toggles joinmesasges\n" +
-                "`  " + STATIC.prefix + "settings joinmessages join  <Hello %user% on %guild%>`  -  Sets join message\n" +
-                "`  " + STATIC.prefix + "settings joinmessages leave `<Godbye %user%> -  Sets leave message\n" +
-                "`  " + STATIC.prefix + "settings joinmessages channel <#Channel>` - Sets message channel"
+        return  "`  " + STATIC.PREFIX + "settings joinmessages toggle`  -  Toggles joinmesasges\n" +
+                "`  " + STATIC.PREFIX + "settings joinmessages join  <Hello %user% on %guild%>`  -  Sets join message\n" +
+                "`  " + STATIC.PREFIX + "settings joinmessages leave `<Godbye %user%> -  Sets leave message\n" +
+                "`  " + STATIC.PREFIX + "settings joinmessages channel <#Channel>` - Sets message channel"
                 ;
     }
 
     public String prefixHelp() {
-        return  "`  " + STATIC.prefix + "settings prefix <prefix/reset>`  -  Sets the server's prefix"
+        return  "`  " + STATIC.PREFIX + "settings prefix <prefix/reset>`  -  Sets the server's prefix"
                 ;
     }
 }

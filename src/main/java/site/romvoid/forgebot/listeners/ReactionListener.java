@@ -16,11 +16,12 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import net.dv8tion.jda.core.managers.GuildController;
+import site.romvoid.forgebot.util.MySQL;
 import site.romvoid.forgebot.util.RoleAssignment;
 
 public class ReactionListener extends ListenerAdapter {
     
-    private static final File configYML = new File("/hosting/rasputin/config.yml");
+    private static final File configYML = new File("/hosting/d2bot/config.yml");
     private static final ObjectMapper configMapper = new ObjectMapper(new YAMLFactory());
 
     private static ConfigRoles LoadedRoles;
@@ -55,6 +56,9 @@ public class ReactionListener extends ListenerAdapter {
 
 	@Override
     public void onMessageReactionAdd(MessageReactionAddEvent event) {
+        if(!MySQL.ifGuildExists(event.getGuild())){
+            MySQL.createServer(event.getGuild());
+        }
         TextChannel channel = event.getTextChannel();
         Message message = null;
         Emote emote = event.getReactionEmote().getEmote();

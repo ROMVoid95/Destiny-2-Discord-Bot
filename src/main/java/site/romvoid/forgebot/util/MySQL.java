@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.User;
 
 public class MySQL {
@@ -64,7 +63,7 @@ public class MySQL {
                 connect();
             PreparedStatement ps = connection.prepareStatement("INSERT INTO `guilds`(`id`,`prefix`, `logchannel`) VALUES (?, ?, ?)");
             ps.setString(1, guild.getId());
-            ps.setString(2, STATIC.prefix);
+            ps.setString(2, STATIC.PREFIX);
             ps.execute();
         } catch (SQLException e){
             e.printStackTrace();

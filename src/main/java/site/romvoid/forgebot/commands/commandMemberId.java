@@ -12,6 +12,13 @@ import site.romvoid.forgebot.util.exemptions.NicknameExcemption;
 import site.romvoid.forgebot.util.exemptions.PlayerNotFound;
 
 public class commandMemberId implements Command {
+	
+    private static String removeBrackets(String name) {
+        return name
+                .replaceFirst(
+                        Pattern.quote(name.substring(name.indexOf("["), name.indexOf("]") + 1)), "")
+                .replaceAll(" ", "");
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -21,18 +28,24 @@ public class commandMemberId implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event)
             throws PlayerNotFound, NicknameExcemption {
-
-        String name = event.getMember().getEffectiveName();
         String nickname = null;
+        if (args.length > 0) {
+            String name = args[0];
+            if (name.contains("["))
+                nickname = removeBrackets(name);
+            else
+                nickname = args[0];
+
+        } else {
+            String name = event.getMember().getEffectiveName();
+            if (name.contains("["))
+                nickname = removeBrackets(name);
+            else
+                nickname = name;
+        }
+
         String id = null;
         MessageChannel ch = event.getChannel();
-        if (name.contains("[")) {
-            nickname = name.replaceFirst(
-                    Pattern.quote(name.substring(name.indexOf("["), name.indexOf("]") + 1)), "")
-                    .replaceAll(" ", "");
-        } else {
-            nickname = event.getMember().getEffectiveName();
-        }
 
         try {
             id = Player.getId(nickname);

@@ -2,13 +2,10 @@ package site.romvoid.forgebot.core;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.concurrent.atomic.AtomicReference;
 import javax.security.auth.login.LoginException;
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import site.romvoid.forgebot.commands.commandBug;
-import site.romvoid.forgebot.commands.commandHelp;
 import site.romvoid.forgebot.commands.commandMemberId;
 import site.romvoid.forgebot.commands.commandRaidReport;
 import site.romvoid.forgebot.commands.commandRaidStats;
@@ -60,7 +57,6 @@ public class Main {
     }
     private static void initializeCommands() {
 
-       commandHandler.registerCommand("help", new commandHelp());
        commandHandler.registerCommand("bug", new commandBug());
        commandHandler.registerCommand("rstats", new commandRaidStats());
        commandHandler.registerCommand("clan", new commandUserClan());
