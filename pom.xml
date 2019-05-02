@@ -1,43 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ Copyright (c) 2017 PrimeBot Bot Development Team ~ ~ Licensed under 
+	the MIT license. The full license text is available in the LICENSE file provided 
+	with this project. -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>site.romvoid</groupId>
-	<artifactId>ForgeBot</artifactId>
-	<version>2.0.0</version>
-	<repositories>
-		<repository>
-			<id>jitpack.io</id>
-			<name>JitPack</name>
-			<url>https://jitpack.io</url>
-		</repository>
-		<repository>
-			<id>jcenter</id>
-			<name>JCenter</name>
-			<url>https://jcenter.bintray.com</url>
-		</repository>
-	</repositories>
+
+	<groupId>com.thevoidbot</groupId>
+	<artifactId>PrimeBot</artifactId>
+	<version>3.0.0</version>
+
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
-			<groupId>net.dv8tion</groupId>
-			<artifactId>JDA</artifactId>
-			<version>3.8.2_459</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.8.1</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.15</version>
-		</dependency>
-		<dependency>
-			<groupId>com.vdurmont</groupId>
-			<artifactId>emoji-java</artifactId>
-			<version>4.0.0</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.6</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
@@ -45,19 +26,57 @@
 			<version>20180813</version>
 		</dependency>
 		<dependency>
-			<groupId>com.squareup.okhttp3</groupId>
-			<artifactId>okhttp</artifactId>
-			<version>3.13.1</version>
+			<groupId>fr.bmartel</groupId>
+			<artifactId>jspeedtest</artifactId>
+			<version>1.32.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.dv8tion</groupId>
+			<artifactId>JDA</artifactId>
+			<version>3.8.3_462</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.15</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.26</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.8.5</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
+		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 		<dependency>
-			<groupId>org.xerial</groupId>
-			<artifactId>sqlite-jdbc</artifactId>
-			<version>3.25.2</version>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.11.3</version>
+		</dependency>
+		<dependency>
+			<groupId>tk.plogitech</groupId>
+			<artifactId>darksky-forecast-api</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.kohsuke/github-api -->
+		<dependency>
+			<groupId>org.kohsuke</groupId>
+			<artifactId>github-api</artifactId>
+			<version>1.95</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>3.14.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -67,45 +86,38 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.8.11.1</version>
+			<version>2.9.8</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.MaikWezinkhof</groupId>
-			<artifactId>ConfigurationBuilder</artifactId>
-			<version>0.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.11.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.11.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.26</version>
-		</dependency>
-		<dependency>
-			<groupId>org.graylog2</groupId>
-			<artifactId>gelfclient</artifactId>
-			<version>1.4.4</version>
-		</dependency>
-		<dependency>
-			<groupId>com.mashape.unirest</groupId>
-			<artifactId>unirest-java</artifactId>
-			<version>1.4.9</version>
-		</dependency>
-		<dependency>
-			<groupId>com.kcthota</groupId>
-			<artifactId>emoji4j</artifactId>
-			<version>5.0</version>
+			<groupId>br.com.brjdevs</groupId>
+			<artifactId>utils</artifactId>
+			<version>1.0.0_15</version>
 		</dependency>
 	</dependencies>
-	
+
+	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<name>jcenter</name>
+			<url>http://jcenter.bintray.com/</url>
+		</repository>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+		<repository>
+			<id>oss.snapshots</id>
+			<name>OSS Sonatype Snapshot Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<!-- Compile our code -->
@@ -132,6 +144,12 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Run our tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
+			</plugin>
 			<plugin>
 				<!-- Build an executable JAR -->
 				<groupId>org.apache.maven.plugins</groupId>
@@ -140,7 +158,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>site.romvoid.forgebot.core.Main</mainClass>
+							<mainClass>fun.rubicon.PrimeBot</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
