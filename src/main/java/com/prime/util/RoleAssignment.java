@@ -47,7 +47,6 @@ public class RoleAssignment {
 		String parsedName;
 
 		if (!nickname.contains("#")) {
-			System.out.println(nickname);
 			embedSender.nicknameExcemption(user, nickname);
 		}
 
