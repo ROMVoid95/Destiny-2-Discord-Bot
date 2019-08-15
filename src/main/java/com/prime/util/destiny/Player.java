@@ -1,12 +1,14 @@
-package site.romvoid.forgebot.util.destiny;
+package com.prime.util.destiny;
 
 import java.util.regex.Pattern;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import site.romvoid.forgebot.util.exemptions.NicknameExcemption;
-import site.romvoid.forgebot.util.exemptions.PlayerNotFound;
+import com.prime.util.excemptions.NicknameExcemption;
+import com.prime.util.excemptions.PlayerNotFound;
 
 public class Player {
+  
+  private static boolean isNicknameValid = false;
 
     /**
      * Retreive the MembershipID for the discord user. Requires the user to have nickname set to a
@@ -17,7 +19,7 @@ public class Player {
      * @throws NicknameExcemption
      * @throws PlayerNotFound
      */
-    public static String getId(String nickname) throws NicknameExcemption, PlayerNotFound {
+    public static String getId(String nickname) throws PlayerNotFound {
         String endpoint = "Destiny2/SearchDestinyPlayer/-1/" + nickname.replace("#", "%23") + "/";
         JsonObject json = null;
         try {
@@ -27,7 +29,6 @@ public class Player {
         }
         String id = null;
         JsonArray set = null;
-
         // Throw Exemption if Nickname doesn't contain "#"
         if (!nickname.contains("#")) {
             throw new NicknameExcemption("Your current Nickname **" + nickname
@@ -36,12 +37,9 @@ public class Player {
             set = json.getAsJsonArray("Response").getAsJsonArray();
             if (set.size() > 0) {
                 id = json.getAsJsonArray("Response").get(0).getAsJsonObject().get("membershipId").getAsString();
-                // Return Membership ID
-                return id;
-            } else {
-                throw new PlayerNotFound(
-                        "Cannot find a Destiny 2 account with the nickname **" + nickname + "**");
+                // Return Membership ID                
             }
+            return id;
         }
     }
     
@@ -60,6 +58,15 @@ public class Player {
         return charIds;
     }
     
+    public static boolean isNicknameValid(String nickname) {
+      if (getId(nickname) != null) {
+        isNicknameValid = true;
+
+      } 
+      return isNicknameValid;
+      
+    }
+    
     public static String removeBrackets(String nickname) {
     	String parsedNickname = nickname.replaceFirst(Pattern.quote(nickname.substring(nickname.indexOf("["), nickname.indexOf("]") + 1)), "").replaceAll(" ", "");
         return parsedNickname;
@@ -72,9 +79,5 @@ public class Player {
     	} else {
 			return false;
 		}
-
-
-    	
     }
-        
 }

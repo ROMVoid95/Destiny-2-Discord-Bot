@@ -1,4 +1,4 @@
-package site.romvoid.forgebot.util;
+package com.prime.util;
 
 import java.awt.Color;
 

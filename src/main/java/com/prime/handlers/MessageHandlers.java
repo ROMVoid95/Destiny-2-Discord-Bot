@@ -1,4 +1,4 @@
-package site.romvoid.forgebot.handlers;
+package com.prime.handlers;
 
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.User;
