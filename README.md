@@ -1,5 +1,4 @@
 # Destiny 2 Discord Bot 
-> Currently **PrimeBot**
 
 ---
 
